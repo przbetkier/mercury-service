@@ -1,0 +1,8 @@
+news-api:
+  api-url: 'https://newsapi.org/v2/top-headlines'
+  api-key: '342e4cd72e444b89b14348773701e60a'
+  timeout:
+    read: 1000
+    connect: 300
+
+frontend-url: 'http://localhost:4200'
