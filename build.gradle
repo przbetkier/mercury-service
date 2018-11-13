@@ -45,6 +45,8 @@ dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-undertow', version: "${springBootVersion}"
 	compile 'com.squareup.okhttp3:okhttp:3.11.0'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "${springBootVersion}"
+	compile group: 'org.springframework.retry', name: 'spring-retry', version: '1.2.0.RELEASE'
+	compile group: 'org.springframework', name: 'spring-aspects', version: '5.1.2.RELEASE'
 
 	// kotlin:
 	compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+"
@@ -53,6 +55,8 @@ dependencies {
 
 	// utils:
 	compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.8.0'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.8.0'
 
 	// test:
 	testCompile('org.springframework.boot:spring-boot-starter-test')
@@ -60,4 +64,12 @@ dependencies {
 	testCompile group: 'org.spockframework', name: 'spock-spring', version: "$versions.spock"
 	testCompile group: 'cglib', name: 'cglib-nodep', version: '3.2.5'
 	testCompile group: 'com.github.tomakehurst', name: 'wiremock', version: '2.8.0'
+}
+
+test {
+	if (System.properties['test.profile'] != 'integration') {
+		exclude '**/*integration*'
+	} else {
+		exclude '**/*io/*'
+	}
 }

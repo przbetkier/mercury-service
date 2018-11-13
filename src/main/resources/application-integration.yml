@@ -1,0 +1,6 @@
+news-api:
+  api-url: 'http://localhost:10200/v2/top-headlines'
+  api-key: 'api-key'
+  timeout:
+    read: 200
+    connect: 300

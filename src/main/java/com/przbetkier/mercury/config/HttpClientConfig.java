@@ -7,7 +7,7 @@ import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class HttpClientConfig {
+class HttpClientConfig {
 
     private final HttpClientProperties httpClientProperties;
 

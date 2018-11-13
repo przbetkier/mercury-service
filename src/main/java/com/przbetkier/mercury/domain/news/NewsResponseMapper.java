@@ -1,6 +1,7 @@
 package com.przbetkier.mercury.domain.news;
 
 import static com.przbetkier.mercury.domain.news.NewsCategory.fromCategory;
+import static java.util.stream.Collectors.toList;
 
 import com.przbetkier.mercury.adapter.api.response.NewsResponse;
 import com.przbetkier.mercury.news.Article;
@@ -8,7 +9,8 @@ import com.przbetkier.mercury.news.NewsApiResponse;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
-import java.util.stream.Collectors;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 class NewsResponseMapper {
 
@@ -24,12 +26,16 @@ class NewsResponseMapper {
                                 articleDto.getAuthor(),
                                 articleDto.getTitle(),
                                 StringEscapeUtils.unescapeJava(articleDto.getDescription()),
-                                articleDto.getPublishedAt().toLocalDateTime(),
+                                formatToIsoDate(articleDto.getPublishedAt().toLocalDateTime()),
                                 articleDto.getSource().getName(),
                                 articleDto.getUrl(),
                                 articleDto.getUrlToImage()
                         )
-                ).collect(Collectors.toList())
+                ).collect(toList())
         );
+    }
+
+    private static String formatToIsoDate(LocalDateTime date) {
+        return DateTimeFormatter.ISO_DATE.format(date);
     }
 }
