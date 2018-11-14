@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row justify-content-around">
+    <div class="col-12 message">
+      Select the category of news:
+    </div>
+    <div class="col-12">
+
+      <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="category">
+        <option>entertainment</option>
+        <option>technology</option>
+        <option>health</option>
+        <option>science</option>
+        <option>sports</option>
+      </select>
+
+    </div>
+    <div class="col-8 search-button">
+      <button type="button" class="btn-lg btn-block btn-success" (click)="navigateToArticles()">Search</button>
+    </div>
+  </div>
+</div>

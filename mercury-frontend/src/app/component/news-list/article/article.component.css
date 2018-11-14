@@ -1,0 +1,23 @@
+.article {
+  border: 1px solid #000000;
+  margin-bottom: 8px;
+  padding: 10px;
+}
+
+.article:hover {
+  cursor: pointer;
+}
+
+.title {
+  margin: 10px 10px;
+  font-weight: bold;
+}
+
+.date {
+  text-align: right;
+}
+
+img {
+  width: 200px;
+  height: 125px;
+}

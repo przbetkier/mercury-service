@@ -1,0 +1,5 @@
+<div class="col-12 alert alert-danger">
+  <span *ngIf="error === ComponentError.GENERAL_ERROR || error === ComponentError.INTERNAL_SERVER_ERROR"><strong>Sorry!</strong> Something went wrong.</span>
+  <span *ngIf="error === ComponentError.SERVICE_UNAVAILABLE"><strong>Sorry!</strong> Service is unavailable now. Try again later.</span>
+</div>
+

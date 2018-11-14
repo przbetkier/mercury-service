@@ -1,0 +1,3 @@
+export enum ComponentError {
+  SERVICE_UNAVAILABLE, INTERNAL_SERVER_ERROR, GENERAL_ERROR
+}

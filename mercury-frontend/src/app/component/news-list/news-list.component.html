@@ -1,0 +1,9 @@
+<div class="article row justify-content-around">
+  <app-spinner *ngIf="pageState.isLoading()"></app-spinner>
+  <app-article class="col-12 article" *ngFor="let article of articles" [article]="article"></app-article>
+</div>
+
+<div *ngIf="pageState.hasError()" class="article row justify-content-around">
+  <app-error [error]="pageState.errorType"></app-error>
+</div>
+

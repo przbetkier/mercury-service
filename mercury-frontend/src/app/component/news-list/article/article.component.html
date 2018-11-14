@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row article" (click)="navigateToArticle(article.articleUrl)">
+    <div class="col-4">
+      Author: <span>{{article.author}}</span>
+    </div>
+    <div class="col-4">
+      Source: <span>{{article.sourceName | lowercase}}</span>
+    </div>
+    <div class="col-4 date">
+      Date: <span>{{article.date | date}}</span>
+    </div>
+    <div class="col-12 title">
+      {{article.title}}
+    </div>
+    <div class="col-4">
+      <img *ngIf="article.imageUrl !== null" src="{{article.imageUrl}}">
+      <img *ngIf="article.imageUrl === null" src="../../../../assets/img/placeholder-image.jpg">
+    </div>
+    <div class="col-8">
+      {{article.description}}
+    </div>
+  </div>
+</div>
