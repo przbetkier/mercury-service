@@ -52,7 +52,6 @@ class NewsEndpointSpec extends IntegrationSpec {
         def response = restTemplate.getForEntity(localUrl("/news/${country}/${category}"), Map)
 
         then:
-        println(response.body)
         response.statusCodeValue == 200
         response.body.country == country
         response.body.category == category.toUpperCase()

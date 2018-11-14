@@ -1,5 +1,6 @@
 package com.przbetkier.mercury.domain.news;
 
+import static com.przbetkier.mercury.util.IsoDateProvider.formatToIsoDate;
 import static com.przbetkier.mercury.domain.news.NewsCategory.fromCategory;
 import static java.util.stream.Collectors.toList;
 
@@ -8,9 +9,6 @@ import com.przbetkier.mercury.news.Article;
 import com.przbetkier.mercury.news.NewsApiResponse;
 
 import org.apache.commons.lang.StringEscapeUtils;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 class NewsResponseMapper {
 
@@ -33,9 +31,5 @@ class NewsResponseMapper {
                         )
                 ).collect(toList())
         );
-    }
-
-    private static String formatToIsoDate(LocalDateTime date) {
-        return DateTimeFormatter.ISO_DATE.format(date);
     }
 }

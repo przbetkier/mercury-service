@@ -1,22 +1,23 @@
 buildscript {
-	ext {
-		springBootVersion = '2.1.0.RELEASE'
-		kotlinVersion = '1.3'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
-		classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
-	}
+    ext {
+        springBootVersion = '2.1.0.RELEASE'
+        kotlinVersion = '1.3'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+    }
 }
 
 plugins {
-	id 'org.jetbrains.kotlin.jvm' version '1.3.0'
-	id 'org.jetbrains.kotlin.plugin.spring' version '1.3.0'
-	id 'org.jetbrains.kotlin.plugin.allopen' version '1.3.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.0'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.3.0'
+    id 'org.jetbrains.kotlin.plugin.allopen' version '1.3.0'
+    id "com.moowork.node" version "1.2.0"
 }
 
 apply plugin: 'groovy'
@@ -25,51 +26,93 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-spring'
+apply plugin: 'com.moowork.node'
 
 ext {
-	versions = [
-			spock: '1.0-groovy-2.4'
-	]
+    versions = [
+            spock: '1.0-groovy-2.4'
+    ]
 }
 
 group = 'com.przbetkier'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.7'
+}
+
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	// core: 
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-undertow', version: "${springBootVersion}"
-	compile 'com.squareup.okhttp3:okhttp:3.11.0'
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "${springBootVersion}"
-	compile group: 'org.springframework.retry', name: 'spring-retry', version: '1.2.0.RELEASE'
-	compile group: 'org.springframework', name: 'spring-aspects', version: '5.1.2.RELEASE'
+    // core:
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-undertow', version: "${springBootVersion}"
+    compile 'com.squareup.okhttp3:okhttp:3.11.0'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "${springBootVersion}"
+    compile group: 'org.springframework.retry', name: 'spring-retry', version: '1.2.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-aspects', version: '5.1.2.RELEASE'
 
-	// kotlin:
-	compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+"
-	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	compile("org.jetbrains.kotlin:kotlin-reflect")
+    // kotlin:
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+"
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    compile("org.jetbrains.kotlin:kotlin-reflect")
 
-	// utils:
-	compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
-	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.8.0'
-	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.8.0'
+    // utils:
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.8.0'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.8.0'
+    compile("org.springframework.boot:spring-boot-devtools")
 
-	// test:
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile group: 'org.spockframework', name: 'spock-core', version: "$versions.spock"
-	testCompile group: 'org.spockframework', name: 'spock-spring', version: "$versions.spock"
-	testCompile group: 'cglib', name: 'cglib-nodep', version: '3.2.5'
-	testCompile group: 'com.github.tomakehurst', name: 'wiremock', version: '2.8.0'
+    // test:
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile group: 'org.spockframework', name: 'spock-core', version: "$versions.spock"
+    testCompile group: 'org.spockframework', name: 'spock-spring', version: "$versions.spock"
+    testCompile group: 'cglib', name: 'cglib-nodep', version: '3.2.5'
+    testCompile group: 'com.github.tomakehurst', name: 'wiremock', version: '2.8.0'
 }
 
 test {
-	if (System.properties['test.profile'] != 'integration') {
-		exclude '**/*integration*'
-	} else {
-		exclude '**/*io/*'
-	}
+    if (System.properties['test.profile'] != 'integration') {
+        exclude '**/*integration*'
+    } else {
+        exclude '**/*io/*'
+    }
 }
+
+node {
+    version = '8.12.0'
+    npmVersion = '6.4.1'
+    download = true
+    npmWorkDir = file("${project.projectDir}/mercury-frontend")
+    nodeModulesDir = file("./mercury-frontend")
+}
+
+task buildFrontend(type: NpmTask) {
+    if (project.hasProperty("buildProd")) {
+        args = ['run-script', 'build-prod']
+    } else {
+        args = ['run-script', 'build']
+    }
+}
+
+task testFrontend(type: NpmTask) {
+    args = ['run-script', 'test']
+    enabled = project.hasProperty('runFrontendTests')
+}
+
+task lintFrontend(type: NpmTask, dependsOn: testFrontend) {
+    args = ['run-script', 'lint']
+    enabled = project.hasProperty('runFrontendTests')
+}
+
+test.dependsOn lintFrontend
+
+task copyFrontend(type: Copy, dependsOn: 'buildFrontend') {
+    from './mercury-frontend/dist/mercury-frontend'
+    into './src/main/resources/static'
+}
+
+processResources.dependsOn('copyFrontend')
+buildFrontend.dependsOn('npmInstall')

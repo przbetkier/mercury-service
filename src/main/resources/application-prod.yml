@@ -1,0 +1,6 @@
+news-api:
+  api-url: 'https://newsapi.org/v2/top-headlines'
+  api-key: ${PROD_API_KEY}
+  timeout:
+    read: 1000
+    connect: 300

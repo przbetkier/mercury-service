@@ -16,6 +16,7 @@ public class HttpClientProperties {
     @NotEmpty
     private String apiUrl;
 
+    @NotEmpty
     private String apiKey;
 
     public Timeout getTimeout() {

@@ -5,4 +5,5 @@ news-api:
     read: 1000
     connect: 300
 
-frontend-url: 'http://localhost:4200'
+server:
+  port: 8090
