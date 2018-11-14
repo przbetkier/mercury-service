@@ -12,8 +12,8 @@ public class GlobalExceptionHandler {
 
     private final static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(InvalidCategoryException.class)
-    public ResponseEntity<String> handleInvalidCategoryException(InvalidCategoryException ex) {
+    @ExceptionHandler(NewsCategoryException.class)
+    public ResponseEntity<String> handleInvalidCategoryException(NewsCategoryException ex) {
         logger.warn(ex.getMessage());
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }

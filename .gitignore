@@ -30,5 +30,5 @@ application-local.yml
 ### front-end
 src/main/resources/static/
 mercury-frontend/dist
-mercury-frontend/node-modules
+mercury-frontend/node_modules
 mercury-frontend/npm-v6.4.1

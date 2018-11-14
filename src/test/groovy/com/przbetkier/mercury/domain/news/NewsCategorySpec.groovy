@@ -1,6 +1,6 @@
 package com.przbetkier.mercury.domain.news
 
-import com.przbetkier.mercury.infrastructure.InvalidCategoryException
+import com.przbetkier.mercury.infrastructure.NewsCategoryException
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -31,7 +31,7 @@ class NewsCategorySpec extends Specification {
         NewsCategory.fromCategory(category)
 
         then:
-        thrown InvalidCategoryException
+        thrown NewsCategoryException
 
         where:
         category << ["games", "movies", "programming", "celebrities"]

@@ -9,14 +9,8 @@ class IsoDateProviderSpec extends Specification {
 
     @Unroll
     def "should parse local date time to formatted string"() {
-        given:
-        date
-
-        when:
-        def result = IsoDateProvider.formatToIsoDate(date)
-
-        then:
-        result == expected
+        expect:
+        IsoDateProvider.formatToIsoDate(date) == expected
 
         where:
         date                                 || expected

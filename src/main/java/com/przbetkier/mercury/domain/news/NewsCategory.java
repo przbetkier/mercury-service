@@ -1,6 +1,6 @@
 package com.przbetkier.mercury.domain.news;
 
-import com.przbetkier.mercury.infrastructure.InvalidCategoryException;
+import com.przbetkier.mercury.infrastructure.NewsCategoryException;
 
 public enum NewsCategory {
 
@@ -10,7 +10,7 @@ public enum NewsCategory {
         try {
             return NewsCategory.valueOf(category.toUpperCase());
         } catch (IllegalArgumentException ex) {
-            throw new InvalidCategoryException(String.format("%s is not a valid category!", category));
+            throw new NewsCategoryException(String.format("%s is not a valid category!", category));
         }
     }
 }

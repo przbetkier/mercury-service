@@ -24,12 +24,14 @@ class NewsResponseMapperSpec extends Specification {
         result.category == NewsCategory.TECHNOLOGY
         result.country == "pl"
         result.articles.size() == apiResponse.articles.size()
-        result.articles.first().date == "2018-11-10"
-        result.articles.first().author == article.author
-        result.articles.first().articleUrl == article.url
-        result.articles.first().imageUrl == article.urlToImage
-        result.articles.first().title == article.title
-        result.articles.first().sourceName == article.source.name
-        result.articles.first().description == article.description
+        with(result.articles.first()) {
+            date == "2018-11-10"
+            author == article.author
+            articleUrl == article.url
+            imageUrl == article.urlToImage
+            title == article.title
+            sourceName == article.source.name
+            description == article.description
+        }
     }
 }
