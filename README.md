@@ -12,6 +12,10 @@ A quick introduction of the minimal setup you need to get app running:
 ```
 - open your browser and navigate to: http://localhost:8090/
 
-## Technologies
-Java 8, Spring Boot 2, Angular 6
+## Api documentation:
+
+After local deployment the documentation can be found here: http://localhost:8090/swagger-ui.html
+
+## Technologies, frameworks, languages:
+Java 8, Kotlin, Groovy, Spring Boot 2, Angular 6
 
