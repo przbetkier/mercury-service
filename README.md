@@ -6,10 +6,19 @@ News provider using public newsAPI
 A quick introduction of the minimal setup you need to get app running:
 
 - build project with gradle executing commands below:
+
+For UNIX systems:
 ```shell
 ./gradlew build
 ./gradlew bootRun
 ```
+
+For Windows:
+```
+gradlew.bat build
+gradlew.bat bootRun
+```
+
 - open your browser and navigate to: http://localhost:8090/
 
 ## Api documentation:
